@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  @apply bg-q_bright;
+  padding: 1rem;
+  margin-top: 5rem;
+}

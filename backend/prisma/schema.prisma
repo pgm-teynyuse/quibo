@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id    Int           @id @default(autoincrement())
+  email      String        @unique
+  password   String
+  username   String?       @unique
+  role       String        @default("user")
+  profiles   Profile[]
+  bookShelf  BookShelf[]
+  preferences UserPreference?
+  swapRequestsRequested SwapRequest[] @relation("requester")
+  swapRequestsOwned     SwapRequest[] @relation("owner")
+  sentMessages          Message[] @relation("SentMessages")
+  receivedMessages      Message[] @relation("ReceivedMessages")
+
+
+  @@index([email])
+}
+
+model UserPreference {
+  id          Int    @id @default(autoincrement())
+  userId      Int    @unique
+  booksPerRow Int    @default(4)
+  user        User   @relation(fields: [userId], references: [user_id])
+}
+
+model Profile {
+  profile_id     Int             @id @default(autoincrement())
+  first_name     String
+  last_name      String
+  street_name    String
+  house_number   String
+  postal_code    String
+  city           String
+  user_id        Int
+  user           User            @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  profilePicture ProfilePicture?
+
+  @@index([user_id])
+}
+
+model ProfilePicture {
+  profile_picture_id Int     @id @default(autoincrement())
+  url                String
+  profile_id         Int     @unique
+  profile            Profile @relation(fields: [profile_id], references: [profile_id], onDelete: Cascade)
+
+  @@index([profile_id])
+}
+
+model Book {
+  id          Int     @id @default(autoincrement())
+  title       String
+  authors     String[]
+  publishedDate String?
+  description String?
+  pageCount   Int?
+  categories  String[]
+  thumbnail   String?
+  isbn        String  @unique
+  bookShelf   BookShelf[]
+  swapRequestsForThisBook SwapRequest[] @relation("book")
+  swapRequestsForRequestedBook SwapRequest[] @relation("requestedBook")
+
+  @@index([isbn])
+}
+
+model BookShelf {
+  id             Int           @id @default(autoincrement())
+  userId         Int
+  bookId         Int
+  swap           Boolean       @default(false)
+  user           User          @relation(fields: [userId], references: [user_id], onDelete: Cascade)
+  book           Book          @relation(fields: [bookId], references: [id], onDelete: Cascade)
+}
+
+model SwapRequest {
+  id           Int       @id @default(autoincrement())
+  requesterId  Int
+  ownerId      Int
+  bookId       Int
+  alternativeBookId Int?
+  requestedBookId Int
+  status       String    @default("pending")
+  createdAt    DateTime  @default(now())
+
+  requester    User      @relation("requester", fields: [requesterId], references: [user_id], onDelete: Cascade)
+  owner        User      @relation("owner", fields: [ownerId], references: [user_id], onDelete: Cascade)
+  book         Book      @relation("book", fields: [bookId], references: [id], onDelete: Cascade)
+  requestedBook Book     @relation("requestedBook", fields: [requestedBookId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  senderId  Int
+  receiverId Int
+  content   String
+  timestamp DateTime @default(now())
+
+  sender   User @relation("SentMessages", fields: [senderId], references: [user_id])
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [user_id])
+}
+
+
+

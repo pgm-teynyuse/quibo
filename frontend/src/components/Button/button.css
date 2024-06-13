@@ -1,0 +1,41 @@
+.button {
+    @apply font-medium rounded-q_s text-center;
+
+    &.button--primary {
+        @apply text-q_bright bg-gradient-to-r from-q_primary-100 to-q_primary-100 py-xxs px-s;
+    }
+
+    &.button--secondary {
+        @apply text-q_dark-100 bg-gradient-to-r from-q_tertiairy to-q_secondary p-0.5;
+    }
+
+
+    &.button--big {
+        @apply mt-2 block h-10 w-full;
+    }
+
+    & .button-sec-fill {
+        @apply bg-white px-s rounded-q_s flex items-center gap-xxs;
+
+        padding-top: .2rem;
+        padding-bottom: .2rem;
+
+        & svg {
+            @apply -mt-1;
+        }
+    }
+
+}
+
+.buttonLink {
+    @apply flex pt-7 justify-end items-center gap-xxs text-right;
+
+    & .question{
+        @apply text-q_light;
+    }
+
+    & .text{
+        text-transform: uppercase;
+        @apply text-q_primary-100;
+    }
+}

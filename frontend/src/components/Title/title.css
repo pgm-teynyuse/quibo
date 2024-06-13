@@ -1,0 +1,11 @@
+.title {
+    @apply mb-5;
+}
+
+.titleText {
+    @apply text-titleNormal font-medium text-q_primary-100;
+}
+
+.subtext {
+    @apply text-subText text-q_light;
+}

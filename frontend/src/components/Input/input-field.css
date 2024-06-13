@@ -1,0 +1,48 @@
+.input {
+    @apply flex flex-col gap-2 pb-3;
+
+    &.input--small {
+        @apply w-28 grow;
+    }
+
+    &.input--big {
+        @apply w-full;
+    }
+
+    & .input__label {
+        @apply text-label text-q_primary-100 font-medium;
+    }
+
+    & .input__input-field {
+        @apply h-10 flex;
+
+
+        & .input__field {
+            @apply text-label  w-full bg-inherit pl-xs border rounded-q_s;
+        }
+    }
+}
+
+.input-password {
+    @apply flex flex-col gap-2 pb-5 w-full;
+
+    & .input__label {
+        @apply text-label text-q_primary-100 font-medium;
+    }
+
+    & .input__input-field {
+        @apply h-10 flex relative;
+
+        & .input__field {
+            @apply  w-full bg-inherit pl-xs border rounded-q_s;
+
+            &:focus {
+                @apply border-inherit;
+            }
+        }
+
+        & .password-toggle-icon {
+            @apply absolute right-3 cursor-pointer mt-3.5;
+        }
+    }
+}

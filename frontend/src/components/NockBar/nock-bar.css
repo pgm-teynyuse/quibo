@@ -1,0 +1,4 @@
+.nock-bar {
+    @apply w-full h-14 bg-q_bright;
+    @apply pt-12 pb-10 flex items-center justify-between; 
+}
