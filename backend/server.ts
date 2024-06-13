@@ -929,6 +929,13 @@ app.get(
   }
 );
 
+app.get("/", (req, res) => {
+  res.send("Hello, this is your Quibo backend running!");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 
 const PORT = process.env.PORT || 3000;
