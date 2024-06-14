@@ -1,7 +1,7 @@
 "use client";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { ButtonBig } from "../Button/button";
-import { InputBig, InputSmall, PasswordInput } from "@/components/Input/Input";
+import { InputBig, InputSmall, PasswordInput } from "../Input/Input";
 import { UserData } from "../../../services/authService";
 
 type RegisterFormProps = {

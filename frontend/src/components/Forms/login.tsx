@@ -2,8 +2,8 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { login, UserData } from "../../../services/authService";
 import { useRouter } from "next/navigation";
-import { InputBig, PasswordInput } from "@/components/Input/Input";
-import { ButtonBig } from "@/components/Button/button";
+import { InputBig, PasswordInput } from "../Input/Input";
+import { ButtonBig } from "../../components/Button/button";
 import Link from "next/link";
 
 const LoginForm = ({
