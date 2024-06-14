@@ -16,7 +16,8 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3001", // Origin of your frontend application
+    origin: "http://localhost:3001 || https://quibo.vercel.app", 
+    optionsSuccessStatus: 200,
     methods: ["GET", "POST"],
   },
 });
