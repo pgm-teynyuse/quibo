@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import SearchBooks from "../components/Search/searchBooks";
-import { useUser } from "../contexts/UserContext";
 import React from "react";
 
 const Home = () => {
@@ -20,14 +19,12 @@ const Home = () => {
 
     const verifyToken = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/verify-token",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        const response = await axios.get(`${apiUrl}/api/verify-token`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (response.status === 200) {
           setLoading(false);
@@ -57,7 +54,6 @@ const Home = () => {
       <h1>Welkom op de Home-pagina</h1>
       <button onClick={handleLogout}>Uitloggen</button>
       <SearchBooks />
-
     </main>
   );
 };
