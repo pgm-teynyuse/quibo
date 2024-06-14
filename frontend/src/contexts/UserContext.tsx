@@ -21,8 +21,13 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+      try {
       const decoded = jwtDecode<{ userId: number; email: string }>(token);
       setUser({ userId: decoded.userId, email: decoded.email });
+      } catch (error) {
+        console.error("Invalid token", error);
+        localStorage.removeItem("token");
+      }
     }
   }, []);
 

@@ -40,8 +40,9 @@ const BooksForSwap: React.FC = () => {
   useEffect(() => {
     const fetchBooksForSwap = async () => {
       try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
         const response = await axios.get<BookShelfEntry[]>(
-          "http://localhost:3000/books-for-swap",
+          `${apiUrl}/books-for-swap`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -58,8 +59,9 @@ const BooksForSwap: React.FC = () => {
 
     const fetchMyBooksForSwap = async () => {
       try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
         const response = await axios.get<BookShelfEntry[]>(
-          "http://localhost:3000/my-books-for-swap",
+          `${apiUrl}/my-books-for-swap`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -85,8 +87,9 @@ const BooksForSwap: React.FC = () => {
     }
 
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       const response = await axios.post(
-        "http://localhost:3000/swap-request",
+        `${apiUrl}/swap-request`,
         {
           bookId: bookToSwap,
           requestedBookId: selectedBook.book?.id,
@@ -178,10 +181,7 @@ const BooksForSwap: React.FC = () => {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         className="top-0"
       >
-        <Alert
-          severity={snackbarSeverity}
-          sx={{ width: "100%" }}
-        >
+        <Alert severity={snackbarSeverity} sx={{ width: "100%" }}>
           {snackbarMessage}
         </Alert>
       </Snackbar>

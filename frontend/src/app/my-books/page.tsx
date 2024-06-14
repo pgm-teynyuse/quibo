@@ -41,8 +41,9 @@ const MyBooks: React.FC = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
         const response = await axios.get<BookShelfEntry[]>(
-          "http://localhost:3000/my-books",
+          `${apiUrl}/my-books`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -58,8 +59,9 @@ const MyBooks: React.FC = () => {
 
     const fetchUserPreferences = async () => {
       try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
         const response = await axios.get<{ booksPerRow: number }>(
-          "http://localhost:3000/get-user-preferences",
+          `${apiUrl}/get-user-preferences`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -80,8 +82,9 @@ const MyBooks: React.FC = () => {
 
   const saveUserPreferences = async () => {
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       await axios.post(
-        "http://localhost:3000/save-user-preferences",
+        `${apiUrl}/save-user-preferences`,
         { booksPerRow },
         {
           headers: {
@@ -103,7 +106,8 @@ const MyBooks: React.FC = () => {
 
   const removeBookFromShelf = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:3000/remove-from-shelf/${id}`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      await axios.delete(`${apiUrl}/remove-from-shelf/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -116,8 +120,9 @@ const MyBooks: React.FC = () => {
 
   const updateBookStatus = async (id: number, swap: boolean) => {
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       const response = await axios.patch(
-        `http://localhost:3000/update-book-status/${id}`,
+        `${apiUrl}/update-book-status/${id}`,
         { swap },
         {
           headers: {
@@ -153,7 +158,6 @@ const MyBooks: React.FC = () => {
         />
       </div>
       <div className=" mb-52 overflow-y-auto">
-        {" "}
         {books.length === 0 ? (
           <p>Je hebt geen boeken in uw kast.</p>
         ) : (

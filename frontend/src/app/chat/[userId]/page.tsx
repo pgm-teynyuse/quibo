@@ -1,12 +1,15 @@
 "use client";
 import { useState, useEffect } from "react";
-
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { io } from "socket.io-client";
 import jwt from "jsonwebtoken";
 
-const socket = io("http://localhost:3000"); // Connect to the backend server
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+if (!apiUrl) {
+  throw new Error("NEXT_PUBLIC_API_URL environment variable is not defined");
+}
+const socket = io(apiUrl);
 
 interface Message {
   id: number;
@@ -20,7 +23,7 @@ interface Message {
 
 const ChatPage = ({ params }: { params: { userId: string } }) => {
   const router = useRouter();
-  const userId = params.userId;
+  const userId = params.userId ?? "";
   const [isConnected, setIsConnected] = useState(false);
   const [newChat, setNewChat] = useState<Message | null>(null);
   const [chats, setChats] = useState<Message[]>([]);
@@ -63,7 +66,7 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
           const decoded: any = jwt.decode(token);
           const currentUserId = decoded.userId;
 
-          const response = await axios.get(`/api/messages/${userId}`, {
+          const response = await axios.get(`${apiUrl}/api/messages/${userId}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           setChats(response.data);
@@ -87,7 +90,7 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "/api/messages",
+        `${apiUrl}/api/messages`,
         {
           receiverId: parseInt(userId, 10), // Ensure receiverId is an integer
           content: message,

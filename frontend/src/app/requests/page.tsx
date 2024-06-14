@@ -20,14 +20,12 @@ const Requests: React.FC = () => {
   const fetchReceivedRequests = async () => {
     if (!user) return;
     try {
-      const response = await axios.get<any[]>(
-        "http://localhost:3000/received-requests",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await axios.get<any[]>(`${apiUrl}/received-requests`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setReceivedRequests(response.data);
       setLoading(false);
     } catch (error) {
@@ -38,14 +36,12 @@ const Requests: React.FC = () => {
   const fetchSentRequests = async () => {
     if (!user) return;
     try {
-      const response = await axios.get<any[]>(
-        "http://localhost:3000/sent-requests",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await axios.get<any[]>(`${apiUrl}/sent-requests`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setSentRequests(response.data);
       setLoading(false);
     } catch (error) {
@@ -55,8 +51,9 @@ const Requests: React.FC = () => {
 
   const handleAccept = async (id: number) => {
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       const response = await axios.patch(
-        `http://localhost:3000/swap-request/${id}/accept`,
+        `${apiUrl}/swap-request/${id}/accept`,
         {},
         {
           headers: {
@@ -77,8 +74,9 @@ const Requests: React.FC = () => {
 
   const handleDecline = async (id: number, requesterId: number) => {
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       const response = await axios.patch(
-        `http://localhost:3000/swap-request/${id}/decline`,
+        `${apiUrl}/swap-request/${id}/decline`,
         {},
         {
           headers: {
@@ -95,7 +93,7 @@ const Requests: React.FC = () => {
 
       // Fetch the requester's swap shelf
       const shelfResponse = await axios.get(
-        `http://localhost:3000/user/${requesterId}/swap-shelf`,
+        `${apiUrl}/user/${requesterId}/swap-shelf`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -114,8 +112,9 @@ const Requests: React.FC = () => {
     alternativeBookId: number
   ) => {
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       const response = await axios.post(
-        `http://localhost:3000/swap-request/${id}/alternative`,
+        `${apiUrl}/swap-request/${id}/alternative`,
         { alternativeBookId },
         {
           headers: {
@@ -132,8 +131,9 @@ const Requests: React.FC = () => {
 
   const handleAlternativeResponse = async (id: number, status: string) => {
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       const response = await axios.patch(
-        `http://localhost:3000/swap-request/${id}/alternative-response`,
+        `${apiUrl}/swap-request/${id}/alternative-response`,
         { status },
         {
           headers: {
@@ -161,7 +161,9 @@ const Requests: React.FC = () => {
   return (
     <div className="">
       <div className="mb-6">
-        <h1 className="text-titleNormal text-q_primary-100 font-semibold mb-4">Received Requests</h1>
+        <h1 className="text-titleNormal text-q_primary-100 font-semibold mb-4">
+          Received Requests
+        </h1>
       </div>
 
       {receivedRequests.length === 0 ? (
@@ -175,9 +177,11 @@ const Requests: React.FC = () => {
               handleAccept={handleAccept}
               handleDecline={handleDecline}
               handleAcceptAlternative={handleAcceptAlternative}
-              requesterSwapShelf={requesterSwapShelf} handleAlternativeResponse={function (id: number, response: string): void {
+              requesterSwapShelf={requesterSwapShelf}
+              handleAlternativeResponse={(id: number, response: string) => {
                 throw new Error("Function not implemented.");
-              } }            />
+              }}
+            />
           ))}
         </ul>
       )}
@@ -192,13 +196,18 @@ const Requests: React.FC = () => {
               <SentRequestItem
                 key={request.id}
                 request={request}
-                handleAlternativeResponse={handleAlternativeResponse} handleAccept={function (id: number): void {
+                handleAlternativeResponse={handleAlternativeResponse}
+                handleAccept={(id: number) => {
                   throw new Error("Function not implemented.");
-                } } handleDecline={function (id: number, userId: number): void {
+                }}
+                handleDecline={(id: number, userId: number) => {
                   throw new Error("Function not implemented.");
-                } } handleAcceptAlternative={function (id: number, bookId: number): void {
+                }}
+                handleAcceptAlternative={(id: number, bookId: number) => {
                   throw new Error("Function not implemented.");
-                } } requesterSwapShelf={[]}              />
+                }}
+                requesterSwapShelf={[]}
+              />
             ))}
           </ul>
         )}
