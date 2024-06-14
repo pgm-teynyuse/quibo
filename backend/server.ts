@@ -11,25 +11,18 @@ import axios from "axios";
 
 dotenv.config();
 
-
 const prisma = new PrismaClient();
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || "http://localhost:3001",
+    origin: "http://localhost:3001", // Origin of your frontend application
     methods: ["GET", "POST"],
-    credentials: true,
   },
 });
 
 app.use(bodyParser.json());
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3001",
-    credentials: true,
-  })
-);
+app.use(cors());
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
