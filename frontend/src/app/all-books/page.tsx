@@ -4,7 +4,6 @@ import axios from "axios";
 import { useUser } from "../../contexts/UserContext";
 import BookList from "../../components/Books/bookList";
 import BookSwap from "../../components/Books/bookSwap";
-import Loading from "../../components/Books/Loading";
 import { BookShelfEntry } from "../../app/types/types";
 import Modal from "@mui/material/Modal";
 import Slide from "@mui/material/Slide";
@@ -139,7 +138,7 @@ const BooksForSwap: React.FC = () => {
   };
 
   if (loading) {
-    return <Loading />;
+    return <p>Loading...</p>;
   }
 
   return (
