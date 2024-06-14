@@ -182,14 +182,14 @@ app.post("/login", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/protected", validateToken, (req: CustomRequest, res: Response) => {
+app.get("/protected", validateToken, (_req: CustomRequest, res: Response) => {
   res.status(200).send("This is a protected route");
 });
 
 app.get(
   "/api/verify-token",
   validateToken,
-  (req: CustomRequest, res: Response) => {
+  (_req: CustomRequest, res: Response) => {
     res.status(200).json({ message: "Token is valid" });
   }
 );
@@ -932,7 +932,7 @@ app.get(
   }
 );
 
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.send("Hello, this is your Quibo backend running!");
 });
 
@@ -942,7 +942,7 @@ server.listen(PORT, () => {
 });
 
 // Error handler middleware
-app.use((err, req, res, next) => {
+app.use((err: any, _req: any, res: any, _next: any) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
