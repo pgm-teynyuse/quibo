@@ -16,7 +16,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3001", "https://quibo.vercel.app"],
+    origin: ["http://localhost:3000", "https://quibo.vercel.app"],
     optionsSuccessStatus: 200,
     methods: ["GET", "POST"],
   },
@@ -25,8 +25,10 @@ const io = new Server(server, {
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: ["http://localhost:3001", "https://quibo.vercel.app"],
+    origin: ["http://localhost:3000", "https://quibo.vercel.app"],
     optionsSuccessStatus: 200,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -67,7 +69,6 @@ const validateToken = (
     return res.status(400).json({ error: "Invalid token." });
   }
 };
-
 const getRoomName = (userId1: number, userId2: number) => {
   return [userId1, userId2].sort().join("-");
 };
@@ -936,13 +937,12 @@ app.get("/", (_req, res) => {
   res.send("Hello, this is your Quibo backend running!");
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-// Error handler middleware
-app.use((err: any, _req: any, res: any, _next: any) => {
+app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
