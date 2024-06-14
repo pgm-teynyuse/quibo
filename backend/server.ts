@@ -16,14 +16,19 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3001 || https://quibo.vercel.app", 
+    origin: ["http://localhost:3001", "https://quibo.vercel.app"],
     optionsSuccessStatus: 200,
     methods: ["GET", "POST"],
   },
 });
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3001", "https://quibo.vercel.app"],
+    optionsSuccessStatus: 200,
+  })
+);
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -472,7 +477,6 @@ app.get(
   }
 );
 
-
 app.get(
   "/my-books-for-swap",
   validateToken,
@@ -816,8 +820,6 @@ app.post(
   }
 );
 
-
-
 app.get(
   "/api/messages/:userId",
   validateToken,
@@ -934,9 +936,13 @@ app.get("/", (req, res) => {
   res.send("Hello, this is your Quibo backend running!");
 });
 
-
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+// Error handler middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
