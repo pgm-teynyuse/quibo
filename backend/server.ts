@@ -19,6 +19,7 @@ const io = new Server(server, {
     origin: ["http://localhost:3000", "https://quibo.vercel.app"],
     optionsSuccessStatus: 200,
     methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   },
 });
 
