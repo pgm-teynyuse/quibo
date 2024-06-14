@@ -1,5 +1,5 @@
 import React from "react";
-import BookCard from "../Books/bookCard";
+import BookCard from "./bookCard";
 
 interface BookData {
   id: number;
