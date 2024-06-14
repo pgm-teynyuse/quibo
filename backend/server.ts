@@ -942,7 +942,7 @@ server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
+app.use((_req: any, res: any, _next: any) => {
+  console.error("Something broke!");
   res.status(500).send("Something broke!");
 });
