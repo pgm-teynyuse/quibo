@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import BookModal from "./BookModal";
+import BookModal from "../../components/Books/BookModal";
 import { BookData } from "../../app/types/types";
 
 interface BookShelfEntry {
