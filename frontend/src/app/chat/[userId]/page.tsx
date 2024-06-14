@@ -1,12 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
-
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { io } from "socket.io-client";
 import jwt from "jsonwebtoken";
 
-const socket = io("http://localhost:3000"); // Connect to the backend server
+const socket = io(
+  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3000",
+  {
+    withCredentials: true,
+  }
+); // Connect to the backend server
 
 interface Message {
   id: number;
@@ -63,9 +67,12 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
           const decoded: any = jwt.decode(token);
           const currentUserId = decoded.userId;
 
-          const response = await axios.get(`/api/messages/${userId}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/messages/${userId}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
           setChats(response.data);
           socket.emit("joinRoom", currentUserId, userId);
         } catch (error) {
@@ -87,7 +94,7 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "/api/messages",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/messages`,
         {
           receiverId: parseInt(userId, 10), // Ensure receiverId is an integer
           content: message,
