@@ -12,11 +12,10 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "baseUrl": ".",
+    "paths": {
+      "components/*": ["components/*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
