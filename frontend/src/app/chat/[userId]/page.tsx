@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { io } from "socket.io-client";
 import jwt from "jsonwebtoken";
+import LoadingIndicator from "components/Loading/loading";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 if (!apiUrl) {
@@ -29,6 +30,7 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
   const [chats, setChats] = useState<Message[]>([]);
   const [message, setMessage] = useState<string>("");
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -112,6 +114,10 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
       console.error("Error sending message:", error);
     }
   };
+
+  if (loading) {
+    return <LoadingIndicator />;
+  }
 
   return (
     <div className=" absolute bottom-0 border-q_primary-100">

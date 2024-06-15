@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import SearchBooks from "../components/Search/searchBooks";
 import React from "react";
+import LoadingIndicator from "components/Loading/loading";
 
 const Home = () => {
   const router = useRouter();
@@ -46,7 +47,7 @@ const Home = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingIndicator />;
   }
 
   return (

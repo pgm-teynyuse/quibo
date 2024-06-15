@@ -7,6 +7,7 @@ import { ButtonIconSmall } from "../../components/Button/button";
 import { IconSettings } from "../../components/Icon/Icon";
 import BookSettings from "../../components/Books/bookSettings";
 import React from "react";
+import LoadingIndicator from "components/Loading/loading";
 
 interface BookData {
   id: number;
@@ -138,7 +139,7 @@ const MyBooks: React.FC = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingIndicator />;
   }
 
   return (

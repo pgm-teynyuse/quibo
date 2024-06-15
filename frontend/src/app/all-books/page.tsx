@@ -10,6 +10,7 @@ import Slide from "@mui/material/Slide";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { SnackbarCloseReason } from "@mui/material";
+import LoadingIndicator from "../../components/Loading/loading";
 
 export interface BookData {
   id: number;
@@ -38,7 +39,7 @@ const BooksForSwap: React.FC = () => {
   );
 
   useEffect(() => {
-    console.log("NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL); // Add this line
+    console.log("NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL); 
     const fetchBooksForSwap = async () => {
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -142,7 +143,7 @@ const BooksForSwap: React.FC = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingIndicator />;
   }
 
   return (

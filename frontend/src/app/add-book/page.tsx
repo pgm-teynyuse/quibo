@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import React from "react";
+import LoadingIndicator from "../../components/Loading/loading";
 
 const AddBookPage: React.FC = () => {
   const router = useRouter();
@@ -46,7 +47,7 @@ const AddBookPage: React.FC = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingIndicator />;
   }
 
   return (

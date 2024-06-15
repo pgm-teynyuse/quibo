@@ -5,9 +5,12 @@ import { ButtonLink } from "../../components/Button/button";
 import { useRouter } from "next/navigation";
 import { register, UserData } from "../../../services/authService";
 import React from "react";
+import LoadingIndicator from "components/Loading/loading";
 
 const RegisterPage = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
+
 
   const handleRegister = async (formData: UserData) => {
     try {
@@ -17,6 +20,10 @@ const RegisterPage = () => {
       console.error(error);
     }
   };
+
+  if (loading) {
+    return <LoadingIndicator />;
+  }
 
   return (
     <div>
@@ -35,3 +42,7 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
+function useState(arg0: boolean): [any, any] {
+  throw new Error("Function not implemented.");
+}
+

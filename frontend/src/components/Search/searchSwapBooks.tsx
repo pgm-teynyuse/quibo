@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BookShelfEntry } from "../../app/types/types";
+import LoadingIndicator from "../Loading/loading";
 import { IconSearch } from "../Icon/Icon";
 
 interface SearchBooksProps {
@@ -11,13 +12,18 @@ interface SearchBooksProps {
 const SearchBooks: React.FC<SearchBooksProps> = ({ setBooks }) => {
   const [query, setQuery] = useState("");
   const [allBooks, setAllBooks] = useState<BookShelfEntry[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!apiUrl) {
+    throw new Error("NEXT_PUBLIC_API_URL environment variable is not defined");
+  }
 
   useEffect(() => {
-    // Fetch all books initially
     const fetchBooks = async () => {
       try {
         const response = await axios.get<BookShelfEntry[]>(
-          `http://localhost:3000/books-for-swap`,
+          `${apiUrl}/books-for-swap`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -28,11 +34,13 @@ const SearchBooks: React.FC<SearchBooksProps> = ({ setBooks }) => {
         setBooks(response.data);
       } catch (error) {
         console.error("Error fetching books:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchBooks();
-  }, [setBooks]);
+  }, [setBooks, apiUrl]);
 
   useEffect(() => {
     const debounceTimeout = setTimeout(() => {
@@ -50,6 +58,10 @@ const SearchBooks: React.FC<SearchBooksProps> = ({ setBooks }) => {
 
     return () => clearTimeout(debounceTimeout);
   }, [query, allBooks, setBooks]);
+
+  if (loading) {
+    return <LoadingIndicator />;
+  }
 
   return (
     <div className="flex justify-center w-full mb-4">

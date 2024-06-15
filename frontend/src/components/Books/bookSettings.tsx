@@ -8,7 +8,7 @@ interface BookSettingsProps {
   onClose: () => void;
   booksPerRow: number;
   onBooksPerRowChange: (newBooksPerRow: number) => void;
-  onSavePreferences: () => Promise<void>; // Veranderde functiehandtekening om met async functies om te gaan
+  onSavePreferences: () => Promise<void>; 
 }
 
 const BookSettings: React.FC<BookSettingsProps> = ({

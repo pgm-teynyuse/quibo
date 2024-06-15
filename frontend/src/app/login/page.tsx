@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { login, UserData } from "../../../services/authService";
 import React from "react";
 
+
 const LoginPage = () => {
   const router = useRouter();
 
@@ -19,6 +20,7 @@ const LoginPage = () => {
       console.error(error);
     }
   };
+
 
   return (
     <div>

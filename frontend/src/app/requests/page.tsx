@@ -4,6 +4,7 @@ import axios from "axios";
 import { useUser } from "../../contexts/UserContext";
 import RequestItem from "../../components/Requests/Request-item";
 import SentRequestItem from "../../components/Requests/Sent-Request";
+import LoadingIndicator from "components/Loading/loading";
 
 const Requests: React.FC = () => {
   const [receivedRequests, setReceivedRequests] = useState<any[]>([]);
@@ -11,6 +12,7 @@ const Requests: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [requesterSwapShelf, setRequesterSwapShelf] = useState<any[]>([]);
   const { user } = useUser();
+
 
   useEffect(() => {
     fetchReceivedRequests();
@@ -155,7 +157,7 @@ const Requests: React.FC = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingIndicator />;
   }
 
   return (
