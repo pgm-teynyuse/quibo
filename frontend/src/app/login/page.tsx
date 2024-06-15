@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { login, UserData } from "../../../services/authService";
 import React from "react";
 
-
 const LoginPage = () => {
   const router = useRouter();
 
@@ -16,12 +15,13 @@ const LoginPage = () => {
       const response = await login(formData);
       localStorage.setItem("token", response.data.token);
       router.push("/");
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 100); // Delay the reload by 100 milliseconds
     } catch (error) {
       console.error(error);
     }
   };
-
 
   return (
     <div>
