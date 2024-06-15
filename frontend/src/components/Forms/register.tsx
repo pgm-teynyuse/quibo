@@ -72,8 +72,6 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
           onChange={handleChange}
           autoComplete="off"
         />
-        <div className="flex gap-5">
-        </div>
         <PasswordInput
           label="Wachtwoord"
           name="password"
@@ -83,7 +81,7 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
           onChange={handleChange}
           autoComplete="off"
         />
-        <ButtonBig type="submit" content="Registreren" />
+        <ButtonBig className="mt-5" type="submit" content="Registreren" />
       </form>
     </>
   );
