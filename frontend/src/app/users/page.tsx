@@ -60,7 +60,7 @@ const UsersPage = () => {
           <div
             key={user.user_id}
             onClick={() => handleChat(user.user_id)}
-            className=" bg-white flex items-center p-4 border rounded-xl border-q_primary-100 shadow-sm transition-transform transform hover:scale-105"
+            className=" bg-white flex items-center p-4 border rounded-xl border-q_primary-100 "
           >
             <div className="bg-q_primary-100 w-12 h-12 flex items-center justify-center rounded-full text-white font-bold text-lg">
               {user.username[0]}

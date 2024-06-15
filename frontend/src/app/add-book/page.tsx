@@ -41,10 +41,6 @@ const AddBookPage: React.FC = () => {
     verifyToken();
   }, [router]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    router.push("/login");
-  };
 
   if (loading) {
     return <LoadingIndicator />;

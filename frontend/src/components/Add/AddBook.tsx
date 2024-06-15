@@ -136,7 +136,7 @@ const AddBook: React.FC = () => {
 
   return (
     <div
-      className="flex flex-col w-full overflow-auto"
+      className="flex flex-col w-full pb-16 overflow-auto"
       style={{ maxHeight: "70vh" }}
     >
       <h1 className="text-q_primary-100 font-semibold text-titleNormal">

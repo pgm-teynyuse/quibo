@@ -159,7 +159,7 @@ const MyBooks: React.FC = () => {
         />
       </div>
       <div
-        className=" overflow-x-hidden overflow-auto"
+        className=" overflow-x-hidden pb-16 overflow-auto"
         style={{ maxHeight: "60vh" }}
       >
         {books.length === 0 ? (
