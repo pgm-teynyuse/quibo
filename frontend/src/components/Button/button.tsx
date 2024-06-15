@@ -25,7 +25,7 @@ type ButtonProps = {
 
 const ButtonBig = ({ content, className, onClick, type }: ButtonProps) => {
     return (
-        <button onClick={onClick} className={`button button--primary button--big`}>
+        <button onClick={onClick} className={`button mt-5 button--primary button--big`}>
             {content}
         </button>
     );

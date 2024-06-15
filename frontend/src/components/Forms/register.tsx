@@ -1,7 +1,5 @@
 "use client";
 import { useState, ChangeEvent, FormEvent } from "react";
-import { ButtonBig } from "../Button/button";
-import { InputBig, InputSmall, PasswordInput } from "../Input/Input";
 import { UserData } from "../../../services/authService";
 
 type RegisterFormProps = {
@@ -34,56 +32,99 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <div className="flex gap-5">
-          <InputSmall
-            label="Voornaam"
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+      <div className="flex gap-5 mb-4">
+        <div className="w-1/2">
+          <label
+            htmlFor="first_name"
+            className="block text-q_primary-100 text-sm font-bold mb-2"
+          >
+            Voornaam
+          </label>
+          <input
+            id="first_name"
             name="first_name"
             type="text"
             placeholder="Voornaam"
-            applyToggleStyle={false}
-            onChange={handleChange}
-          />
-          <InputSmall
-            label="Achternaam"
-            name="last_name"
-            type="text"
-            placeholder="Achternaam"
-            applyToggleStyle={false}
+            className="  rounded-q_s w-full py-2 px-3 text-q_primary-100 leading-tight focus:outline-none focus:shadow-outline"
             onChange={handleChange}
           />
         </div>
-        <InputBig
-          label="Gebruikersnaam"
+        <div className="w-1/2">
+          <label
+            htmlFor="last_name"
+            className="block text-q_primary-100 text-sm font-bold mb-2"
+          >
+            Achternaam
+          </label>
+          <input
+            id="last_name"
+            name="last_name"
+            type="text"
+            placeholder="Achternaam"
+            className="  rounded-q_s w-full py-2 px-3 text-q_primary-100 leading-tight focus:outline-none focus:shadow-outline"
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="username"
+          className="block text-q_primary-100 text-sm font-bold mb-2"
+        >
+          Gebruikersnaam
+        </label>
+        <input
+          id="username"
           name="username"
           type="text"
           placeholder="quibooks"
-          applyToggleStyle={false}
+          className="  rounded-q_s w-full py-2 px-3 text-q_primary-100 leading-tight focus:outline-none focus:shadow-outline"
           onChange={handleChange}
           autoComplete="off"
         />
-        <InputBig
-          label="Email"
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="email"
+          className="block text-q_primary-100 text-sm font-bold mb-2"
+        >
+          Email
+        </label>
+        <input
+          id="email"
           name="email"
           type="email"
           placeholder="voorbeeld@quibo.be"
-          applyToggleStyle={false}
+          className="  rounded-q_s w-full py-2 px-3 text-q_primary-100 leading-tight focus:outline-none focus:shadow-outline"
           onChange={handleChange}
           autoComplete="off"
         />
-        <PasswordInput
-          label="Wachtwoord"
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="password"
+          className="block text-q_primary-100 text-sm font-bold mb-2"
+        >
+          Wachtwoord
+        </label>
+        <input
+          id="password"
           name="password"
           type="password"
           placeholder="********"
-          applyToggleStyle={true}
+          className="  rounded-q_s w-full py-2 px-3 text-q_primary-100 leading-tight focus:outline-none focus:shadow-outline"
           onChange={handleChange}
           autoComplete="off"
         />
-        <ButtonBig className="mt-5" type="submit" content="Registreren" />
-      </form>
-    </>
+      </div>
+      <button
+        type="submit"
+        className="bg-q_primary-100  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-q_s focus:outline-none focus:shadow-outline w-full"
+      >
+        Registreren
+      </button>
+    </form>
   );
 };
 

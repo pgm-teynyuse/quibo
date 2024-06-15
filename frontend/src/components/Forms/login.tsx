@@ -2,8 +2,6 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { login, UserData } from "../../../services/authService";
 import { useRouter } from "next/navigation";
-import { InputBig, PasswordInput } from "../Input/Input";
-import { ButtonBig } from "../../components/Button/button";
 import Link from "next/link";
 
 const LoginForm = ({
@@ -34,25 +32,41 @@ const LoginForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <InputBig
-        label="Email"
-        name="email"
-        type="email"
-        placeholder="voorbeeld@quibo.be"
-        applyToggleStyle={false}
-        onChange={handleChange}
-        autoComplete="off"
-      />
-      <PasswordInput
-        label="Wachtwoord"
-        name="password"
-        type="password"
-        placeholder="********"
-        applyToggleStyle={false}
-        onChange={handleChange}
-        autoComplete="off"
-      />
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+      <div className="mb-4">
+        <label
+          htmlFor="email"
+          className="block text-q_primary-100 text-sm font-bold mb-2"
+        >
+          Email
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="voorbeeld@quibo.be"
+          className="  rounded-q_s w-full py-2 px-3 text-q_primary-100 leading-tight focus:outline-none focus:shadow-outline"
+          onChange={handleChange}
+          autoComplete="off"
+        />
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="password"
+          className="block text-q_primary-100 text-sm font-bold mb-2"
+        >
+          Wachtwoord
+        </label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="********"
+          className="  rounded-q_s w-full py-2 px-3 text-q_primary-100 leading-tight focus:outline-none focus:shadow-outline"
+          onChange={handleChange}
+          autoComplete="off"
+        />
+      </div>
       <div className="flex justify-between mb-5 items-center mt-4">
         <div className="flex items-center">
           <input
@@ -60,25 +74,28 @@ const LoginForm = ({
             id="rememberMe"
             checked={rememberMe}
             onChange={handleCheckboxChange}
+            className="mr-2 leading-tight"
           />
-          <label
-            htmlFor="rememberMe"
-            className=" ml-1 text-subText text-q_primary-100"
-          >
+          <label htmlFor="rememberMe" className="text-sm text-gray-600">
             Onthoud me
           </label>
         </div>
         <Link href="/login">
-          <p className=" text-subText font-medium text-q_primary-100">
+          <p className="text-sm text-q_primary-100 hover:text-q_primary-100">
             Wachtwoord vergeten
           </p>
         </Link>
       </div>
-      <ButtonBig  type="submit" content="Inloggen" />
+      <div>
+        <button
+          type="submit"
+          className="bg-q_primary-100  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-q_s focus:outline-none focus:shadow-outline w-full"
+        >
+          Inloggen
+        </button>
+      </div>
     </form>
   );
 };
 
 export default LoginForm;
-
-
