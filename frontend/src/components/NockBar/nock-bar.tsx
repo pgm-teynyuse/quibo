@@ -12,8 +12,18 @@ type NockProps = {
 
 const NockBarOffline = ({ className }: NockProps) => {
   return (
-    <div className={`nock-bar nock-bar--short`}>
-      <MainLogo />
+    <div className={`nock-bar p-4 fixed left-0 top-0 nock-bar--online`}>
+      <div className="flex gap-5">
+        <IconChat className={"flex fill-q_bright"} />
+        <IconSwap className={"flex fill-q_bright"} />
+      </div>
+      <Link href="/">
+        <MainLogo />
+      </Link>
+      <div className="flex gap-5">
+        <IconChat className={"flex fill-q_bright"} />
+        <IconSwap className={"flex fill-q_bright"} />
+      </div>
     </div>
   );
 };

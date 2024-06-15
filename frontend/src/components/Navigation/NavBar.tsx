@@ -8,7 +8,6 @@ import { navBooks, navHome, navMap, navShop } from "../Icon/Icon"; // Update the
 const NavBar: React.FC = () => {
   const pathname = usePathname();
   const { user } = useUser();
-  console.log(user?.userId);
   const getIconClass = (path: string) => {
     return {
       className: pathname === path ? "fill-q_tertiairy" : "fill-q_bright",

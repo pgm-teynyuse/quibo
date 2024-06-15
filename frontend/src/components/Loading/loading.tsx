@@ -8,7 +8,7 @@ const LoadingIndicator: React.FC = () => {
   }
 
   return (
-    <div className="flex absolute -top-5 left-11 justify-center items-center h-screen">
+    <div className="flex justify-center items-center">
       <Lottie animationData={loadingAnimation} loop={true} />
     </div>
   );

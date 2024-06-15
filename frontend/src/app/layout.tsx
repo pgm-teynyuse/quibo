@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
-import { NockBarOffline, NockBarOnline } from "../components/NockBar/nock-bar";
 import "./globals.css";
-import { UserProvider } from "../contexts/UserContext"; // Correcte import
-import ClientSideWrapper from "../components/ClientSideWrapper"; // Importeer de nieuwe component
+import { UserProvider } from "../contexts/UserContext";
+import ClientSideWrapper from "../components/ClientSideWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,10 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <UserProvider>
-          <NockBarOnline />
-          <ClientSideWrapper>
-            {children}
-          </ClientSideWrapper>
+          <ClientSideWrapper>{children}</ClientSideWrapper>
         </UserProvider>
       </body>
     </html>

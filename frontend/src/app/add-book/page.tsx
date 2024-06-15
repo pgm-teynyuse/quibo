@@ -52,7 +52,6 @@ const AddBookPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Add a Book</h1>
       <AddBook />
     </div>
   );
