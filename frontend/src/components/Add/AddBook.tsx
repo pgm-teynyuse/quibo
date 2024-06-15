@@ -23,14 +23,16 @@ const AddBook: React.FC = () => {
   const [swap, setSwap] = useState<boolean>(false);
   const { user } = useUser();
 
-  console.log("user", user);
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!apiUrl) {
+    throw new Error("NEXT_PUBLIC_API_URL environment variable is not defined");
+  }
 
   const searchBook = async () => {
     try {
       const response = await axios.get<BookData>(
-        `http://localhost:3000/search-book/${isbn}`
+        `${apiUrl}/search-book/${isbn}`
       );
-      console.log(response.data);
       setBook(response.data);
       setMessage("");
     } catch (error) {
@@ -44,13 +46,13 @@ const AddBook: React.FC = () => {
 
     try {
       const bookResponse = await axios.post<BookData>(
-        "http://localhost:3000/add-book",
+        `${apiUrl}/add-book`,
         book
       );
       const bookId = bookResponse.data.id;
 
       await axios.post(
-        "http://localhost:3000/add-to-shelf",
+        `${apiUrl}/add-to-shelf`,
         { bookId, swap },
         {
           headers: {
@@ -96,6 +98,5 @@ const AddBook: React.FC = () => {
     </div>
   );
 };
-
 
 export default AddBook;

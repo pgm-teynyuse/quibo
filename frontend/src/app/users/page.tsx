@@ -1,5 +1,6 @@
-"use client";
 // pages/users/page.tsx
+"use client";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -45,16 +46,30 @@ const UsersPage = () => {
   };
 
   return (
-    <div>
-      <h1>Users</h1>
-      <ul>
+    <div className="container mx-auto ">
+      <h1 className="text-titleNormal text-q_primary-100 font-bold mb-1">
+        Chat
+      </h1>
+      <p className="text-label text-q_primary-100 mb-5">
+        Laatste conversaties
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {users.map((user) => (
-          <li key={user.user_id}>
-            {user.username} ({user.email})
-            <button onClick={() => handleChat(user.user_id)}>Chat</button>
-          </li>
+          <div
+            key={user.user_id}
+            onClick={() => handleChat(user.user_id)}
+            className=" bg-white flex items-center p-4 border rounded-xl border-q_primary-100 shadow-sm transition-transform transform hover:scale-105"
+          >
+            <div className="bg-q_primary-100 w-12 h-12 flex items-center justify-center rounded-full text-white font-bold text-lg">
+              {user.username[0]}
+            </div>
+            <div className="ml-4 text-q_primary-100">
+              <h2 className="text-titleSmall font-semibold">{user.username}</h2>
+              <p className="text-label">{user.email}</p>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

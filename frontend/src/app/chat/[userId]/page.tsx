@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { io } from "socket.io-client";
@@ -17,8 +17,8 @@ interface Message {
   receiverId: number;
   content: string;
   timestamp: string;
-  sender?: { username: string }; // Mark as optional
-  receiver?: { username: string }; // Mark as optional
+  sender?: { username: string };
+  receiver?: { username: string };
 }
 
 const ChatPage = ({ params }: { params: { userId: string } }) => {
@@ -28,6 +28,7 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
   const [newChat, setNewChat] = useState<Message | null>(null);
   const [chats, setChats] = useState<Message[]>([]);
   const [message, setMessage] = useState<string>("");
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -86,13 +87,20 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
     }
   }, [newChat]);
 
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  }, [chats]);
+
   const handleSendMessage = async () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
         `${apiUrl}/api/messages`,
         {
-          receiverId: parseInt(userId, 10), // Ensure receiverId is an integer
+          receiverId: parseInt(userId, 10),
           content: message,
         },
         {
@@ -106,20 +114,37 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
   };
 
   return (
-    <div>
-      <h1>Chat</h1>
-      <div>
+    <div className=" absolute bottom-0 border-q_primary-100">
+      <div
+        className=" h-96 overflow-y-auto flex flex-col space-y-4"
+        ref={chatContainerRef}
+      >
         {chats.map((chat) => (
-          <div key={chat.id}>
-            <strong>{chat.sender?.username ?? "Unknown"}:</strong>{" "}
-            {chat.content}
-            <br />
-            <small>{new Date(chat.timestamp).toLocaleString()}</small>
+          <div
+            key={chat.id}
+            className={`flex ${
+              chat.senderId === parseInt(userId) ? "justify-start" : "justify-end"
+            }`}
+          >
+            <div
+              className={`p-2 rounded-lg max-w-xs ${
+                chat.senderId === parseInt(userId)
+                  ? "bg-white text-q_primary-100"
+                  : "bg-white text-q_primary-100"
+              }`}
+            >
+              {chat.content}
+              <br />
+              <small className="text-label text-q_primary-100">
+                {new Date(chat.timestamp).toLocaleString()}
+              </small>
+            </div>
           </div>
         ))}
       </div>
-      <div>
+      <div className="flex mt-4 mb-4">
         <textarea
+          className="flex-grow p-2 border border-gray-300 rounded-md mr-2"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type your message here..."
@@ -128,8 +153,9 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
           type="submit"
           onClick={handleSendMessage}
           disabled={!message.trim() || !isConnected}
+          className="bg-q_primary-100 text-white px-4 py-2 rounded-md disabled:bg-gray-300"
         >
-          Send
+          Verzend
         </button>
       </div>
     </div>

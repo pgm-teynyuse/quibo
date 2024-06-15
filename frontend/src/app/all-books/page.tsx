@@ -38,6 +38,7 @@ const BooksForSwap: React.FC = () => {
   );
 
   useEffect(() => {
+    console.log("NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL); // Add this line
     const fetchBooksForSwap = async () => {
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -190,3 +191,4 @@ const BooksForSwap: React.FC = () => {
 };
 
 export default BooksForSwap;
+

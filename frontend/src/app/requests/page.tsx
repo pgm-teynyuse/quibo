@@ -187,7 +187,9 @@ const Requests: React.FC = () => {
       )}
 
       <div className="mt-10">
-        <h1 className="text-2xl font-bold mb-4">Sent Requests</h1>
+        <h1 className="text-titleNormal text-q_primary-100 font-semibold mb-4">
+          Sent Requests
+        </h1>
         {sentRequests.length === 0 ? (
           <p>No sent requests.</p>
         ) : (
