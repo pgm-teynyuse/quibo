@@ -151,6 +151,7 @@ const MyBooks: React.FC = () => {
             Mijn <strong>boekenkast</strong>
           </h1>
         </div>
+
         <ButtonIconSmall
           content="Bewerken"
           icon={<IconSettings />}
@@ -159,6 +160,10 @@ const MyBooks: React.FC = () => {
           type={"button"}
         />
       </div>
+      <p className="text-label mb-10 text-q_tertiairy ">
+        Dubbel-tik op een boek om het beschikbaar te maken voor swap of
+        omgekeerd.
+      </p>
       <div
         className=" overflow-x-hidden pb-16 overflow-auto"
         style={{ maxHeight: "60vh" }}
@@ -167,7 +172,9 @@ const MyBooks: React.FC = () => {
           <>
             <p>Je hebt geen boeken in uw kast.</p>
             <Link href="/add-book">
-              <p className="text-q_primary-100 font-semibold">Voeg boeken toe aan jouw boekenkast</p>
+              <p className="text-q_primary-100 font-semibold">
+                Voeg boeken toe aan jouw boekenkast
+              </p>
             </Link>
           </>
         ) : (
