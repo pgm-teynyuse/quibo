@@ -73,40 +73,6 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
           autoComplete="off"
         />
         <div className="flex gap-5">
-          <InputSmall
-            label="Straatnaam"
-            name="street_name"
-            type="text"
-            placeholder="Straatnaam"
-            applyToggleStyle={false}
-            onChange={handleChange}
-          />
-          <InputSmall
-            label="Huisnummer"
-            name="house_number"
-            type="text"
-            placeholder="12"
-            applyToggleStyle={false}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex gap-5">
-          <InputSmall
-            label="Gemeente"
-            name="city"
-            type="text"
-            placeholder="Gemeente"
-            applyToggleStyle={false}
-            onChange={handleChange}
-          />
-          <InputSmall
-            label="Postcode"
-            name="postal_code"
-            type="text"
-            placeholder="1234"
-            applyToggleStyle={false}
-            onChange={handleChange}
-          />
         </div>
         <PasswordInput
           label="Wachtwoord"

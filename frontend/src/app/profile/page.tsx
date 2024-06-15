@@ -54,7 +54,7 @@ const Profile = () => {
     <div>
       <h1>Profile</h1>
       <p>Welcome, {user?.email}</p>
-      <button onClick={handleLogout}>Uitloggen</button>
+      <button className="text-red-500" onClick={handleLogout}>Uitloggen</button>
     </div>
   );
 };

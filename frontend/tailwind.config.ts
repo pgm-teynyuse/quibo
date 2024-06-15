@@ -40,7 +40,6 @@ module.exports = {
         },
       },
       height: {
-        upc_logobg: "334px",
         q_modalH: "35rem",
       },
       width: {

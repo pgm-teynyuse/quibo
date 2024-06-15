@@ -29,11 +29,11 @@ const InputSmall = ({
   onChange,
 }: InputFieldProps) => {
   return (
-    <div className={`input input--small`}>
+    <div className={`input input--small `}>
       <label htmlFor={name} className={`input__label`}>
         {label}
       </label>
-      <div className={`input__input-field`}>
+      <div className={`bg-white input__input-field`}>
         <input
           onChange={onChange}
           disabled={toggle}
@@ -68,7 +68,7 @@ const InputBig = ({
       <label htmlFor={name} className={`input__label`}>
         {label}
       </label>
-      <div className={`input__input-field`}>
+      <div className={`input__input-field bg-white`}>
         <input
           disabled={toggle}
           name={name}

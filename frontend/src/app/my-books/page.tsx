@@ -8,6 +8,7 @@ import { IconSettings } from "../../components/Icon/Icon";
 import BookSettings from "../../components/Books/bookSettings";
 import React from "react";
 import LoadingIndicator from "components/Loading/loading";
+import Link from "next/link";
 
 interface BookData {
   id: number;
@@ -163,7 +164,12 @@ const MyBooks: React.FC = () => {
         style={{ maxHeight: "60vh" }}
       >
         {books.length === 0 ? (
-          <p>Je hebt geen boeken in uw kast.</p>
+          <>
+            <p>Je hebt geen boeken in uw kast.</p>
+            <Link href="/add-book">
+              <p className="text-q_primary-100 font-semibold">Voeg boeken toe aan jouw boekenkast</p>
+            </Link>
+          </>
         ) : (
           <BookGrid
             books={books}

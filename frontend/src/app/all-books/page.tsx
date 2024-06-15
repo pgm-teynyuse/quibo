@@ -149,7 +149,7 @@ const BooksForSwap: React.FC = () => {
   return (
     <div>
       {books.length === 0 ? (
-        <p>No books available for swap.</p>
+        <p>Geen boeken aanwezig voor swap.</p>
       ) : (
         <BookList
           books={books}
