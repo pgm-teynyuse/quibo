@@ -635,6 +635,7 @@ app.get(
         include: {
           book: true,
           requestedBook: true,
+          owner: true,
           requester: {
             select: {
               email: true,

@@ -1,3 +1,5 @@
+import { title } from "process";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -19,6 +21,7 @@ module.exports = {
         titleSmall: ["1rem", { lineHeight: "1.2" }],
         subText: ["0.8rem", { lineHeight: "1.2" }],
         readText: ["1rem", { lineHeight: "1.5" }],
+        titleSwap: ["0.8rem", { lineHeight: "1.2" }],
         label: [".813rem", { lineHeight: "1.2" }],
       },
       colors: {

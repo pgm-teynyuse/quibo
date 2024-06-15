@@ -5,6 +5,7 @@ import { useUser } from "../../contexts/UserContext";
 import RequestItem from "../../components/Requests/Request-item";
 import SentRequestItem from "../../components/Requests/Sent-Request";
 import LoadingIndicator from "components/Loading/loading";
+import Link from "next/link";
 
 const Requests: React.FC = () => {
   const [receivedRequests, setReceivedRequests] = useState<any[]>([]);
@@ -161,17 +162,23 @@ const Requests: React.FC = () => {
   }
 
   return (
-    <div className="">
+    <div
+      className="overflow-x-hidden overflow-auto"
+      style={{ maxHeight: "70vh" }}
+    >
       <div className="mb-6">
         <h1 className="text-titleNormal text-q_primary-100 font-semibold mb-4">
-          Received Requests
+          Ontvangen Swaps
         </h1>
       </div>
 
       {receivedRequests.length === 0 ? (
         <p>No received requests.</p>
       ) : (
-        <ul>
+        <ul
+          className="overflow-x-hidden overflow-auto"
+          style={{ maxHeight: "50vh" }}
+        >
           {receivedRequests.map((request) => (
             <RequestItem
               key={request.id}
@@ -190,10 +197,15 @@ const Requests: React.FC = () => {
 
       <div className="mt-10">
         <h1 className="text-titleNormal text-q_primary-100 font-semibold mb-4">
-          Sent Requests
+          Verzonden Swaps
         </h1>
         {sentRequests.length === 0 ? (
-          <p>No sent requests.</p>
+          <>
+            <p>Geen verzonden Swaps.</p>
+            <Link href="/all-books">
+              <p className="text-q_primary-100">Bekijk boeken om te swappen</p>
+            </Link>
+          </>
         ) : (
           <ul>
             {sentRequests.map((request) => (

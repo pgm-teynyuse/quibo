@@ -42,7 +42,7 @@ const BookModal: React.FC<BookModalProps> = ({ book, onClose, removeBook }) => {
             content="Verwijderen"
             subtext="Verwijder deze boek uit je collectie"
             className=""
-            icon={<IconDelete className={"fill-q_primary-100 mt-4 ml-4"} />}
+            icon={<IconDelete className={"fill-q_primary-100 mt-2.5 ml-1.5"} />}
             type={"button"}
             onClick={removeBook}
           />

@@ -34,6 +34,7 @@ export interface RequestItemProps {
     id: number;
     owner: {
       email: string;
+      username: string;
     };
     requestedBook: {
       title: string;

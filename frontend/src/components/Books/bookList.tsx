@@ -9,8 +9,15 @@ interface BookListProps {
 
 const BookList: React.FC<BookListProps> = ({ books, onSelectBook }) => {
   const [filteredBooks, setFilteredBooks] = useState<BookShelfEntry[]>(books);
+
+  const truncateTitle = (title: string, maxLength: number) => {
+    return title.length > maxLength
+      ? title.substring(0, maxLength) + "..."
+      : title;
+  };
+
   return (
-    <div className="flex  flex-col w-full">
+    <div className="flex flex-col w-full">
       <SearchBooks setBooks={setFilteredBooks} />
       <div className="mb-4 text-label text-q_primary-100">
         <h2 className="text-titleSmall font-semibold mb-1">
@@ -19,8 +26,8 @@ const BookList: React.FC<BookListProps> = ({ books, onSelectBook }) => {
         <p>{filteredBooks.length} resultaten gevonden</p>
       </div>
       <div
-        style={{ maxHeight: "50vh" }}
-        className="flex overflow-x-hidden overflow-auto  flex-wrap"
+        style={{ maxHeight: "70vh" }}
+        className="flex pb-16 overflow-x-hidden overflow-auto flex-wrap"
       >
         {filteredBooks.map((entry) => (
           <div
@@ -31,15 +38,21 @@ const BookList: React.FC<BookListProps> = ({ books, onSelectBook }) => {
             <div className="p-1">
               {entry.book ? (
                 <>
-                  {entry.book.thumbnail && (
+                  {entry.book.thumbnail ? (
                     <img
                       src={entry.book.thumbnail}
-                      alt={entry.book.title}
+                      alt="Book Cover"
                       className="w-full h-56 rounded-q_s object-cover"
                     />
+                  ) : (
+                    <div className="w-full h-56 rounded-q_s bg-gray-300 flex items-center justify-center">
+                      <span className="text-white text-titleSwap text-center px-2">
+                        {truncateTitle(entry.book.title, 20) || "No Title"}
+                      </span>
+                    </div>
                   )}
-                  <h2 className="text-titleSmall mt-1 w-full text-q_primary-100 font-semibold">
-                    {entry.book.title || "No Title"}
+                  <h2 className="text-titleSwap mt-1 w-full text-q_primary-100 font-semibold">
+                    {truncateTitle(entry.book.title, 20) || "No Title"}
                   </h2>
                   <p className="mt-2 text-q_light text-label">
                     {entry.book.authors.join(", ") || "No Authors"}

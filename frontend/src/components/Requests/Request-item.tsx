@@ -21,20 +21,21 @@ const RequestItem = ({
         <IconBook className=" fill-q_tertiairy" />
         {request.book.title}
       </div>
+      <p>{request.owner.username}</p>
       <p className="mb-4">{request.status}</p>
       {request.status === "pending" && (
         <div className="space-x-2">
           <button
-            className="px-4 py-2 bg-green-500 text-white rounded"
+            className="px-4 py-2 bg-q_primary-100 text-white rounded"
             onClick={() => handleAccept(request.id)}
           >
-            Accept
+            Accepteren
           </button>
           <button
-            className="px-4 py-2 bg-red-500 text-white rounded"
+            className="px-4 py-2 border border-red-500 text-red-500 rounded"
             onClick={() => handleDecline(request.id, request.requester.user_id)}
           >
-            Decline
+            Afwijzen
           </button>
         </div>
       )}
@@ -46,7 +47,7 @@ const RequestItem = ({
               handleAcceptAlternative(request.id, Number(e.target.value))
             }
           >
-            <option value="">Select alternative book</option>
+            <option value="">Selecteer een alternative boek</option>
             {requesterSwapShelf.map((book) => (
               <option key={book.id} value={book.id}>
                 {book.book.title}
