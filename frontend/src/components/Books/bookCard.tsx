@@ -34,7 +34,12 @@ const BookCard: React.FC<BookCardProps> = ({
   const handleClick = () => {
     if (clickTimeout) {
       clearTimeout(clickTimeout);
-      setClickTimeout(null);
+      setClickTimeout(
+        setTimeout(() => {
+          handleDoubleClick();
+          setClickTimeout(null);
+        }, 200)
+      );
       handleDoubleClick();
     } else {
       setClickTimeout(
@@ -50,7 +55,7 @@ const BookCard: React.FC<BookCardProps> = ({
     <>
       <div>
         <div
-          className={`border-2 ${
+          className={`border-4 ${
             entry.swap ? "border-q_tertiairy" : "border-transparent"
           } border-2 rounded-md box-border`}
           onClick={handleClick}

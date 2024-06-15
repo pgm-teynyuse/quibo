@@ -9,15 +9,19 @@ interface BookListProps {
 
 const BookList: React.FC<BookListProps> = ({ books, onSelectBook }) => {
   const [filteredBooks, setFilteredBooks] = useState<BookShelfEntry[]>(books);
-
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex  flex-col w-full">
       <SearchBooks setBooks={setFilteredBooks} />
       <div className="mb-4 text-label text-q_primary-100">
-        <h2 className="text-titleSmall font-semibold mb-1">Boeken om te swappen</h2>
+        <h2 className="text-titleSmall font-semibold mb-1">
+          Boeken om te swappen
+        </h2>
         <p>{filteredBooks.length} resultaten gevonden</p>
       </div>
-      <div className="flex flex-wrap">
+      <div
+        style={{ maxHeight: "50vh" }}
+        className="flex overflow-x-hidden overflow-auto  flex-wrap"
+      >
         {filteredBooks.map((entry) => (
           <div
             key={entry.id}

@@ -1,11 +1,9 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "../../contexts/UserContext";
 import { useRouter } from "next/navigation";
 import LoadingIndicator from "components/Loading/loading";
 import axios from "axios";
-
-
 
 const Profile = () => {
   const router = useRouter();
@@ -45,19 +43,20 @@ const Profile = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    router.push("/login");
+    window.location.reload(); // Refresh the page
   };
 
+  if (loading) {
+    return <LoadingIndicator />;
+  }
 
   return (
     <div>
       <h1>Profile</h1>
       <p>Welcome, {user?.email}</p>
       <button onClick={handleLogout}>Uitloggen</button>
-      <p></p>
     </div>
   );
-}
-
+};
 
 export default Profile;

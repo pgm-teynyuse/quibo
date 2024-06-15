@@ -4,38 +4,30 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-
-    // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    fontFamily: {
-      ubuntu: ["Ubuntu", "sans-serif"],
-      poppins: ["Poppins", "sans-serif"],
-      body: ["Poppins", "sans-serif"],
-      heading: ["Ubuntu", "sans-serif"],
-    },
-    fontSize: {
-      titleNormal: ["1.5rem", { lineHeight: "1.2" }],
-      titleSmall: ["1rem", { lineHeight: "1.2" }],
-      subText: ["0.8rem", { lineHeight: "1.2" }],
-      readText: ["1rem", { lineHeight: "1.5" }],
-      label: [".813rem", { lineHeight: "1.2" }],
-    },
     extend: {
-      fontWeight: {
-        light: 100,
-        regular: 300,
-        medium: 500,
-        bold: 600,
+      fontFamily: {
+        ubuntu: ["Ubuntu", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+        body: ["Poppins", "sans-serif"],
+        heading: ["Ubuntu", "sans-serif"],
+      },
+      fontSize: {
+        titleNormal: ["1.5rem", { lineHeight: "1.2" }],
+        titleSmall: ["1rem", { lineHeight: "1.2" }],
+        subText: ["0.8rem", { lineHeight: "1.2" }],
+        readText: ["1rem", { lineHeight: "1.5" }],
+        label: [".813rem", { lineHeight: "1.2" }],
       },
       colors: {
         q_primary: {
-          100: "hsla(228, 56%, 35%, 1) ",
+          100: "hsla(228, 56%, 35%, 1)",
         },
         q_secondary: "hsla(342, 78%, 66%, 100)",
         q_tertiairy: "hsla(29, 100%, 65%, 100)",
-        q_light: "hsla(222, 40%, 60%, 100%)",
+        q_light: "hsla(222, 40%, 60%, 100)",
         q_bright: "hsla(0, 0%, 94%, 100)",
         q_dark: {
           5: "hsla(0, 0%, 90%, 100)",
@@ -66,10 +58,8 @@ module.exports = {
         q_modal: "3rem",
       },
       boxShadow: {
-        // x, y, blur, size
         card: "-2px 2px 4px 0",
       },
-
     },
   },
   plugins: [],

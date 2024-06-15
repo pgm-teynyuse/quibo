@@ -4,7 +4,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import LoadingIndicator from "components/Loading/loading";
 
 interface User {
   user_id: number;
@@ -15,7 +14,6 @@ interface User {
 const UsersPage = () => {
   const [users, setUsers] = useState<User[]>([]);
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -47,19 +45,17 @@ const UsersPage = () => {
     router.push(`/chat/${userId}`);
   };
 
-  if (loading) {
-    return <LoadingIndicator />;
-  }
 
   return (
-    <div className="container mx-auto ">
+    <div >
       <h1 className="text-titleNormal text-q_primary-100 font-bold mb-1">
         Chat
       </h1>
-      <p className="text-label text-q_primary-100 mb-5">
-        Laatste conversaties
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <p className="text-label text-q_primary-100 mb-5">Laatste conversaties</p>
+      <div
+        className="overflow-x-hidden overflow-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+        style={{ maxHeight: "58vh" }}
+      >
         {users.map((user) => (
           <div
             key={user.user_id}

@@ -5,8 +5,6 @@ import axios from "axios";
 import React from "react";
 import LoadingIndicator from "components/Loading/loading";
 import Link from "next/link";
-import { swapkastHome } from "components/Icon/Icon";
-
 
 const Home = () => {
   const router = useRouter();
@@ -14,9 +12,16 @@ const Home = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    console.log("Token", token);
 
     if (!token) {
-      router.push("/login");
+      if (!sessionStorage.getItem("hasRefreshed")) {
+        sessionStorage.setItem("hasRefreshed", "true");
+        window.location.reload();
+      } else {
+        sessionStorage.removeItem("hasRefreshed");
+        router.push("/login");
+      }
       return;
     }
 

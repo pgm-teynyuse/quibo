@@ -158,7 +158,10 @@ const MyBooks: React.FC = () => {
           type={"button"}
         />
       </div>
-      <div className=" mb-52 overflow-y-auto">
+      <div
+        className=" overflow-x-hidden overflow-auto"
+        style={{ maxHeight: "60vh" }}
+      >
         {books.length === 0 ? (
           <p>Je hebt geen boeken in uw kast.</p>
         ) : (

@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { io } from "socket.io-client";
 import jwt from "jsonwebtoken";
-import LoadingIndicator from "components/Loading/loading";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 if (!apiUrl) {
@@ -30,7 +29,6 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
   const [chats, setChats] = useState<Message[]>([]);
   const [message, setMessage] = useState<string>("");
   const chatContainerRef = useRef<HTMLDivElement>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -115,12 +113,11 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
     }
   };
 
-  if (loading) {
-    return <LoadingIndicator />;
-  }
-
   return (
-    <div className=" absolute bottom-0 border-q_primary-100">
+    <div
+      className="flex flex-col w-full overflow-x-hidden overflow-auto"
+      style={{ maxHeight: "90vh" }}
+    >
       <div
         className=" h-96 overflow-y-auto flex flex-col space-y-4"
         ref={chatContainerRef}
@@ -129,7 +126,9 @@ const ChatPage = ({ params }: { params: { userId: string } }) => {
           <div
             key={chat.id}
             className={`flex ${
-              chat.senderId === parseInt(userId) ? "justify-start" : "justify-end"
+              chat.senderId === parseInt(userId)
+                ? "justify-start"
+                : "justify-end"
             }`}
           >
             <div

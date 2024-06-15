@@ -15,6 +15,7 @@ const LoginPage = () => {
     try {
       const response = await login(formData);
       localStorage.setItem("token", response.data.token);
+      window.location.reload();
       router.push("/");
     } catch (error) {
       console.error(error);

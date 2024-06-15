@@ -30,6 +30,7 @@ const AddBook: React.FC = () => {
   const [scanning, setScanning] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
+  const [useFrontCamera, setUseFrontCamera] = useState<boolean>(true);
   const { user } = useUser();
   const webcamRef = useRef<Webcam>(null);
 
@@ -129,8 +130,15 @@ const AddBook: React.FC = () => {
     setOpen(false);
   };
 
+  const handleCameraSwitch = () => {
+    setUseFrontCamera((prev) => !prev);
+  };
+
   return (
-    <div className="flex flex-col w-full mb-4">
+    <div
+      className="flex flex-col w-full overflow-auto"
+      style={{ maxHeight: "70vh" }}
+    >
       <h1 className="text-q_primary-100 font-semibold text-titleNormal">
         Boeken toevoegen
       </h1>
@@ -161,15 +169,23 @@ const AddBook: React.FC = () => {
         subtext="Scan de barcode van het boek"
         icon={<IconBarcode className={"fill-q_primary-100 ml-2 mt-2"} />}
       />
-
       {scanning && (
         <>
+          <button
+            onClick={handleCameraSwitch}
+            className="mb-4 w-60 p-2 bg-q_primary-100 text-white rounded-full"
+          >
+            {useFrontCamera ? "Achter" : "Voor"} Camera
+          </button>
           <div className="w-full max-w-lg">
             <div className="webcam-small">
               <Webcam
                 audio={false}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
+                videoConstraints={{
+                  facingMode: useFrontCamera ? "user" : "environment",
+                }}
                 className="w-full h-full rounded-md"
               />
             </div>
