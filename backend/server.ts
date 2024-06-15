@@ -18,7 +18,7 @@ const io = new Server(server, {
   cors: {
     origin: ["http://localhost:3000", "https://quibo.vercel.app"],
     optionsSuccessStatus: 200,
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD", "CONNECT", "TRACE",],
     allowedHeaders: ["Content-Type", "Authorization"],
   },
 });
@@ -28,7 +28,7 @@ app.use(
   cors({
     origin: ["http://localhost:3000", "https://quibo.vercel.app"],
     optionsSuccessStatus: 200,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD", "CONNECT", "TRACE",],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
